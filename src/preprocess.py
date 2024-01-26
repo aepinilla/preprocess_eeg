@@ -28,7 +28,7 @@ def preprocess(streams, streams_index):
     # Band-pass filter
     bandpassed = referenced[0].filter(4, 45, fir_design='firwin')
 
-    # Downsample
+    # Downsample for faster processing
     downsampled = bandpassed.copy().resample(sfreq=downsample_sfreq)
 
     return downsampled

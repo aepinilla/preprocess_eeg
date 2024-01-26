@@ -24,12 +24,12 @@ def extract_trials(downsampled, streams, streams_index):
         # Trial start timestamp
         marker_start_time = marker_time_zero_ref[m]
         # Index of the EEG sample recorded immediately after the marker was received
-        EEG_start_idx = np.where(eeg_time_zero_ref >= marker_start_time)
-        EEG_start_idx = EEG_start_idx[0][0]
+        eeg_start_idx = np.where(eeg_time_zero_ref >= marker_start_time)
+        eeg_start_idx = eeg_start_idx[0][0]
         # Index of trial end
-        EEG_end_idx = EEG_start_idx + (trial_len * sfreq)
+        eeg_end_idx = eeg_start_idx + (trial_len * sfreq)
         # Subset trial
-        trial = np.array([channel[EEG_start_idx:EEG_end_idx] for channel in eeg_data])
+        trial = np.array([channel[eeg_start_idx:eeg_end_idx] for channel in eeg_data])
         # TODO: Handle time difference between marker timestamp and EEG timestamp
         # time_offset = EEG_start - marker_start_time
         trials.append(trial)
