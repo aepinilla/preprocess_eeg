@@ -12,9 +12,9 @@ git clone git@github.com:aepinilla/preprocess_eeg.git
 ```
 2. Install the required libraries
 ```
-pip install -r requirements. txt
+pip install -r requirements.txt
 ```
-3. Go to the folder where the libraries are stored in your computer. If you are using Conda, they 
+3. Go to the folder where the libraries are stored in your computer. If you are using Conda in Mac, they 
 should be stored in:
 ```
 /Users/USERNAME/anaconda3/envs/preprocess_eeg/lib/python3.11/site-packages 
