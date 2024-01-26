@@ -5,12 +5,12 @@ from .settings import eeg_ch_names, ch_types, downsample_sfreq
 
 def preprocess(streams, streams_index):
     # Get sampling frequency of the EEG stream
-    EEG_index = streams_index['eeg']
-    sfreq = int(streams[EEG_index]['info']['nominal_srate'][0])
+    eeg_index = streams_index['eeg']
+    sfreq = int(streams[eeg_index]['info']['nominal_srate'][0])
 
     # Create MNE object
     info = mne.create_info(ch_names=eeg_ch_names, sfreq=sfreq, ch_types=ch_types)
-    EEG_channels = streams[EEG_index]["time_series"][:, :len(eeg_ch_names)].T
+    EEG_channels = streams[eeg_index]["time_series"][:, :len(eeg_ch_names)].T
     raw = mne.io.RawArray(EEG_channels, info)
     raw = raw.drop_channels(['REF'])
 
