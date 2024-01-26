@@ -3,7 +3,9 @@
 ## Introduction
 This is a simple Python project that demonstrates how to conduct basic signal
 preprocessing steps on data stored in a XDF file. XDF is the file format
-commonly used to store data streamed over LabStreamingLayer (LSL). 
+commonly used to store data streamed over LabStreamingLayer (LSL).
+
+Tested on Python 3.11.7
 
 ## Installation
 1. Clone this repository
