@@ -1,4 +1,4 @@
 # Preprocess EEG
-Simple Python script for preprocessing EEG signals stored in a XDF file
+Simple Python script for preprocessing EEG signals stored in an XDF file
 
 
