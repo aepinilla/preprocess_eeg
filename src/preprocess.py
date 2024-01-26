@@ -12,7 +12,6 @@ def preprocess(streams, streams_index):
     info = mne.create_info(ch_names=eeg_ch_names, sfreq=sfreq, ch_types=ch_types)
     eeg_data = streams[eeg_index]["time_series"][:, :len(eeg_ch_names)].T
     raw = mne.io.RawArray(eeg_data, info)
-    raw = raw.drop_channels(['REF'])
 
     # Remove powerline and low frequency noise
     notched = raw.notch_filter([50, 60])
