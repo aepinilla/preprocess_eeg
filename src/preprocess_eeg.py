@@ -3,7 +3,7 @@ import mne
 from asrpy import ASR
 import numpy as np
 
-from src.settings import *
+from src.settings import STREAMS_NAMES, stream_types, eeg_ch_names, trial_len, downsample_sfreq, trial_start_marker
 
 # Path to folder with XDF files
 DATA_PATH = 'data/'
