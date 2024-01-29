@@ -13,7 +13,6 @@ CH_TYPES = "eeg"
 class PreprocessEEG:
 
     def __init__(self, file_name: str):
-        # Define file path
         self.file = DATA_PATH + file_name
         # Obtain streams and header from XDF file
         self.streams, self.header = pyxdf.load_xdf(self.file)
@@ -23,7 +22,6 @@ class PreprocessEEG:
         self.down_sampled = []
 
     def find_indexes(self):
-        # Find stream indexes
         for i in range(len(self.streams)):
             match self.streams[i]['info']['name'][0]:
                 # EDIT ACCORDING TO THE NUMBER OF STREAMS STORED IN YOUR XDF FILE
@@ -34,7 +32,7 @@ class PreprocessEEG:
                 case STREAMS_NAMES.markers:
                     self.streams_index['markers'] = i
 
-            # If all streams indexes are equal or greater than zero, exit the for loop
+            # If all streams indexes have been found, exit the for loop
             if all(i >= 0 for i in list(self.streams_index.values())):
                 break
 
@@ -93,7 +91,7 @@ class PreprocessEEG:
         return trials
 
 
-def preprocessing_pipeline(file_name: str):
+def preprocessing_pipeline(file_name: str) -> list[NDArray[np.float64]]:
     file = PreprocessEEG(file_name)
     file.find_indexes()
     file.clean_signal()
