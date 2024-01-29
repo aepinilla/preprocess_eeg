@@ -1,3 +1,5 @@
+import types
+
 # Path to folder with XDF files
 DATA_PATH = 'data/'
 
@@ -11,9 +13,11 @@ ch_types = "eeg"
 trial_len = 60
 
 # Names of LabStreamingLayer (LSL) streams
-ecg_stream_name = 'BrainVision RDA'
-marker_stream_name = 'psychopy_marker_oddball'
-eeg_stream_name = 'g.USBamp'
+# Create object compatible with Match-Case Statement
+streams_names = types.SimpleNamespace()
+streams_names.ecg = 'BrainVision RDA'
+streams_names.markers = 'psychopy_marker_oddball'
+streams_names.eeg = 'g.USBamp'
 
 # Target frequency for downsampling data after preprocessing
 downsample_sfreq = 128

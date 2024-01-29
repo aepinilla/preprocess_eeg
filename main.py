@@ -1,16 +1,14 @@
-from src.read_xdf import read_xdf
-from src.preprocess import preprocess
-from src.extract_trials import extract_trials
-from src.settings import DATA_PATH
+from preprocess_eeg import *
 
 def main(file_name):
-    streams, streams_index = read_xdf(DATA_PATH + file_name)
-    preprocessed = preprocess(streams, streams_index)
-    trials = extract_trials(preprocessed, streams, streams_index)
+    t = PreprocessEEG(file_name)
+    t._find_indexes()
+    t._clean_signal()
+    trials = t.extract_trials()
 
-    print('Preprocessing is complete')
-    print(len(trials), 'trials have been extracted')
+    return trials
+
 
 if __name__ == "__main__":
-    file_name = 'PJGHY.xdf'
+    file_name = "PJGHY.xdf"
     main(file_name)
