@@ -3,6 +3,8 @@ import mne
 import numpy as np
 import numpy.typing as npt
 from asrpy import ASR
+from dataclasses import dataclass
+
 
 from src.settings import STREAMS_NAMES, stream_types, eeg_ch_names, trial_len, downsample_sfreq, trial_start_marker
 
@@ -19,7 +21,7 @@ class PreprocessEEG:
         self.streams, self.header = pyxdf.load_xdf(self.file)
         # Initialize streams index dictionary
         self.streams_index = {key: -1 for key in stream_types}
-        # Initialize empty variable with downsample data
+        # Initialize empty variable with down sampled data
         self.down_sampled = []
 
     def find_indexes(self):
@@ -61,6 +63,7 @@ class PreprocessEEG:
 
     def extract_trials(self):
         # Get index of EEG and markers streams
+        type(self.streams)
         eeg_index = self.streams_index['eeg']
         markers_index = self.streams_index['markers']
         # Get sampling frequency of EEG stream
