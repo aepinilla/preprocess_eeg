@@ -1,4 +1,4 @@
-from preprocess_eeg import *
+from src.preprocess_eeg import *
 
 def main(file_name):
     t = PreprocessEEG(file_name)

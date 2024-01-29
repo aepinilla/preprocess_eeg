@@ -3,7 +3,7 @@ import mne
 from asrpy import ASR
 import numpy as np
 
-from settings import *
+from src.settings import *
 
 
 class PreprocessEEG:
