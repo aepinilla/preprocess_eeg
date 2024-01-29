@@ -17,7 +17,7 @@ class PreprocessEEG:
         # Initialize empty variable with downsample data
         self.down_sampled = []
 
-    def _find_indexes(self):
+    def find_indexes(self):
         # Find stream indexes
         for i in range(len(self.streams)):
             match self.streams[i]['info']['name'][0]:
@@ -32,7 +32,7 @@ class PreprocessEEG:
             if all(i >= 0 for i in list(self.streams_index.values())):
                 break
 
-    def _clean_signal(self):
+    def clean_signal(self):
         # Get sampling frequency of the EEG stream
         eeg_index = self.streams_index['eeg']
         sfreq = int(self.streams[eeg_index]['info']['nominal_srate'][0])
@@ -87,3 +87,9 @@ class PreprocessEEG:
         return trials
 
 
+def preprocessing_pipeline(file_name: str):
+    file = PreprocessEEG(file_name)
+    file.find_indexes()
+    file.clean_signal()
+    trials = file.extract_trials()
+    return trials

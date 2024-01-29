@@ -1,14 +1,10 @@
-from src.preprocess_eeg import *
+from src.preprocess_eeg import preprocessing_pipeline
 
-def main(file_name):
-    t = PreprocessEEG(file_name)
-    t._find_indexes()
-    t._clean_signal()
-    trials = t.extract_trials()
 
-    return trials
+def main(file_name: str):
+    return preprocessing_pipeline(file_name)
 
 
 if __name__ == "__main__":
     file_name = "PJGHY.xdf"
-    main(file_name)
+    main(file_name = file_name)
