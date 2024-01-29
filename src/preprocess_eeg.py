@@ -1,7 +1,8 @@
 import pyxdf
 import mne
-from asrpy import ASR
 import numpy as np
+import numpy.typing as npt
+from asrpy import ASR
 
 from src.settings import STREAMS_NAMES, stream_types, eeg_ch_names, trial_len, downsample_sfreq, trial_start_marker
 
@@ -41,7 +42,7 @@ class PreprocessEEG:
         eeg_index = self.streams_index['eeg']
         sfreq = int(self.streams[eeg_index]['info']['nominal_srate'][0])
         # Create MNE object
-        info = mne.create_info(ch_names=eeg_ch_names, sfreq=sfreq, ch_types=ch_types)
+        info = mne.create_info(ch_names=eeg_ch_names, sfreq=sfreq, ch_types=CH_TYPES)
         eeg_data = self.streams[eeg_index]["time_series"][:, :len(eeg_ch_names)].T
         raw = mne.io.RawArray(eeg_data, info)
         # Remove powerline and low frequency noise
@@ -91,7 +92,7 @@ class PreprocessEEG:
         return trials
 
 
-def preprocessing_pipeline(file_name: str) -> list[NDArray[np.float64]]:
+def preprocessing_pipeline(file_name: str) -> list[npt.NDArray[np.float64]]:
     file = PreprocessEEG(file_name)
     file.find_indexes()
     file.clean_signal()
