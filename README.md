@@ -51,7 +51,7 @@ python main.py
 
 ## Settings
 The default settings of this script work with a sample XDF file taken from the paper mentioned above. You can change
-the setting to use it with your XDF files.
+the settings to use it with your XDF files.
 
 To customise it, please do the following:
 1. Go to src/settings.py and adjust the values according to the characteristics of your XDF file. 
