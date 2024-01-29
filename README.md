@@ -1,11 +1,32 @@
 # Preprocess EEG
 
-## Introduction
-This is a simple Python project that demonstrates how to conduct basic signal
-preprocessing steps on data stored in a XDF file. XDF is the file format
-commonly used to store data streamed over LabStreamingLayer (LSL).
+## Description
+This is a simple Python script that demonstrates an approach for preprocessing EEG signals
+stored in a XDF file, the file format
+commonly used to store data streamed using [LabStreamingLayer (LSL)](https://github.com/sccn/labstreaminglayer).
 
-Tested on Python 3.11.7
+## Cite the research paper
+This script is based on [this](https://www.frontiersin.org/articles/10.3389/frvir.2022.964754/full) research paper. Please feel free to use it for any academic or commercial projects, and consider citing the paper:
+
+Pinilla, A., Voigt-Antons, J. N., Garcia, J., Raffe, W., & Möller, S. (2023). Real-time affect detection in virtual reality: a technique based on a three-dimensional model of affect and EEG signals. Frontiers in Virtual Reality, 3, 964754. https://doi.org/10.3389/frvir.2022.964754
+
+```
+@article{pinilla_real-time_2023,
+	title = {Real-time affect detection in virtual reality: a technique based on a three-dimensional model of affect and {EEG} signals},
+	volume = {3},
+	issn = {2673-4192},
+	shorttitle = {Real-time affect detection in virtual reality},
+	url = {https://www.frontiersin.org/articles/10.3389/frvir.2022.964754/full},
+	doi = {10.3389/frvir.2022.964754},
+	urldate = {2024-01-29},
+	journal = {Frontiers in Virtual Reality},
+	author = {Pinilla, Andres and Voigt-Antons, Jan-Niklas and Garcia, Jaime and Raffe, William and Möller, Sebastian},
+	month = jan,
+	year = {2023},
+	pages = {964754},
+	file = {Full Text:/Users/aepinilla/Zotero/storage/XF5NBVSX/Pinilla et al. - 2023 - Real-time affect detection in virtual reality a t.pdf:application/pdf},
+}
+```
 
 ## Installation
 1. Clone this repository
@@ -19,7 +40,7 @@ pip install -r requirements.txt
 3. Go to the folder where the libraries are stored in your computer. If you are using Conda in Mac, they 
 should be stored in:
 ```
-/Users/USERNAME/anaconda3/envs/preprocess_eeg/lib/python3.11/site-packages 
+/Users/$USERNAME/anaconda3/envs/preprocess_eeg/lib/python3.11/site-packages 
 ```
 4. Go to the folder "asrpy" and replace the files "asr_utils.py" and "asr.py" with the files in this fork: https://github.com/aepinilla/asrpy/tree/main/asrpy
 5. Download the data folder to the root of the project. The data folder is available [here](https://drive.google.com/drive/folders/1tCpIKOqNX8GkNTFijNCGq36yR6OsGGYl?usp=share_link).
@@ -27,3 +48,46 @@ should be stored in:
 ```
 python main.py
 ```
+
+## Settings
+The default settings of this script work with a sample XDF file taken from the paper mentioned above. You can change
+the setting to use it with your XDF files.
+
+To customise it, please do the following:
+1. Go to src/settings.py and adjust the values according to the characteristics of your XDF file. 
+```
+# Names of LabStreamingLayer (LSL) streams
+STREAMS_NAMES.ecg = 'BrainVision RDA'
+STREAMS_NAMES.markers = 'psychopy_marker_oddball'
+STREAMS_NAMES.eeg = 'g.USBamp'
+
+# Stream types
+stream_types = ['ecg', 'eeg', 'markers']
+
+# Names of EEG channels
+eeg_ch_names = ["REF", "F3", "F4", "P3", "P4", "T7", "T8", "CZ"]
+
+# Length of each trial in seconds
+trial_len = 60
+
+# Target frequency for downsampling data after preprocessing
+downsample_sfreq = 128
+
+# The marker that was triggered when each trial started
+trial_start_marker = 7
+```
+
+2. Go to src/preprocess_eeg.py and customise the Match-Case statement according the names of your streams.
+```
+match self.streams[i]['info']['name'][0]:
+    # EDIT ACCORDING TO THE NUMBER OF STREAMS STORED IN YOUR XDF FILE
+    case STREAMS_NAMES.ecg:
+        self.streams_index['ecg'] = i
+    case STREAMS_NAMES.eeg:
+        self.streams_index['eeg'] = i
+    case STREAMS_NAMES.markers:
+        self.streams_index['markers'] = i
+```
+
+## Python version
+Tested on Python 3.11.7

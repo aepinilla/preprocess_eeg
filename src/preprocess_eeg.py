@@ -5,15 +5,20 @@ import numpy as np
 
 from src.settings import *
 
+# Path to folder with XDF files
+DATA_PATH = 'data/'
+# Channel types. Required for building MNE object
+CH_TYPES = "eeg"
 
 class PreprocessEEG:
+
     def __init__(self, file_name: str):
         # Define file path
         self.file = DATA_PATH + file_name
         # Obtain streams and header from XDF file
         self.streams, self.header = pyxdf.load_xdf(self.file)
         # Initialize streams index dictionary
-        self.streams_index = {'ecg': -1, 'eeg': -1, 'markers': -1}
+        self.streams_index = {key: -1 for key in stream_types}
         # Initialize empty variable with downsample data
         self.down_sampled = []
 
@@ -21,11 +26,12 @@ class PreprocessEEG:
         # Find stream indexes
         for i in range(len(self.streams)):
             match self.streams[i]['info']['name'][0]:
-                case streams_names.ecg:
+                # EDIT ACCORDING TO THE NUMBER OF STREAMS STORED IN YOUR XDF FILE
+                case STREAMS_NAMES.ecg:
                     self.streams_index['ecg'] = i
-                case streams_names.eeg:
+                case STREAMS_NAMES.eeg:
                     self.streams_index['eeg'] = i
-                case streams_names.markers:
+                case STREAMS_NAMES.markers:
                     self.streams_index['markers'] = i
 
             # If all streams indexes are equal or greater than zero, exit the for loop
