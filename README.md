@@ -1,7 +1,7 @@
 # Preprocess EEG
 
 ## Description
-This is a simple Python script for preprocessing EEG signals stored in a XDF file, the file format
+This is a simple Python script for preprocessing EEG signals stored in a XDF file, the format
 commonly used to store data streamed using [LabStreamingLayer (LSL)](https://github.com/sccn/labstreaminglayer).
 
 The preprocessing steps are the following:
