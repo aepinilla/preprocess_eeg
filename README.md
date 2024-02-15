@@ -8,7 +8,7 @@ The preprocessing steps are the following:
 1. Apply notch filter (typically at 50 or 60 Hz, depending on which country was the data recorded).
 2. TODO: Remove bad channels.
 3. High-pass at 0.75 Hz to remove low frequency drifts.
-4. Remove artifacts using [Artifact Subspace Reconstruction (ASR)](https://sccn.ucsd.edu/githubwiki/files/asr-final-export.pdf).
+4. Remove artifacts using [Artifact Subspace Reconstruction (ASR)](https://patents.google.com/patent/US20160113587A1/en).
 5. Common-average referencing.
 6. Apply band-pass filter to remove frequencies below 4 Hz and above 45 Hz.
 7. Down-sample to 128 Hz (original sampling rate was 256 Hz).
