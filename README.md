@@ -13,7 +13,7 @@ The preprocessing steps are the following:
 6. Apply band-pass filter to remove frequencies below 4 Hz and above 45 Hz.
 7. Down-sample to 128 Hz (original sampling rate was 256 Hz).
 
-The order of the preprocessing steps is based on recommendations taken from [Makoto's preprocessing pipeline](https://sccn.ucsd.edu/wiki/Makoto%27s_preprocessing_pipeline#High-pass_filter_the_data_at_1-Hz_.28for_ICA.2C_ASR.2C_and_CleanLine.29.2805.2F18.2F2022_updated.29), and requirements to use ASR taken from [this PDF](https://sccn.ucsd.edu/githubwiki/files/asr-final-export.pdf) by Christian Kothe.
+The order of the preprocessing steps is based on recommendations taken from [Makoto's preprocessing pipeline](https://sccn.ucsd.edu/wiki/Makoto%27s_preprocessing_pipeline), and requirements to use ASR taken from [this PDF](https://sccn.ucsd.edu/githubwiki/files/asr-final-export.pdf) by Christian Kothe.
 
 ## Cite the research paper
 An earlier version of this preprocessing pipeline was used in [this](https://www.frontiersin.org/articles/10.3389/frvir.2022.964754/full) research paper. Please feel free to use it for any academic or commercial projects, and consider citing the paper:
