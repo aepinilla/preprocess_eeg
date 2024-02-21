@@ -1,8 +1,8 @@
 # Preprocess EEG
 
 ## Description
-This is a simple Python script for preprocessing EEG signals stored in a XDF file, the format
-commonly used to store data streamed using [LabStreamingLayer (LSL)](https://github.com/sccn/labstreaminglayer).
+This is a simple Python script for preprocessing EEG signals stored in an XDF file, the format
+commonly used to save data streamed using [LabStreamingLayer (LSL)](https://github.com/sccn/labstreaminglayer).
 
 The preprocessing steps are the following:
 1. Apply notch filter (typically at 50 or 60 Hz, depending on which country was the data recorded).
