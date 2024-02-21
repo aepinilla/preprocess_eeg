@@ -87,7 +87,7 @@ downsample_sfreq = 128
 trial_start_marker = 7
 ```
 
-2. Go to src/preprocess_eeg.py and customise the Match-Case statement according the names of your streams.
+2. Go to src/preprocess_eeg.py and edit the Match-Case statement according to the number and signal type of the streams in your file.
 ```
 match self.streams[i]['info']['name'][0]:
     # EDIT ACCORDING TO THE NUMBER OF STREAMS STORED IN YOUR XDF FILE
