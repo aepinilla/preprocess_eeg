@@ -11,7 +11,7 @@ The preprocessing steps are the following:
 4. Remove artifacts using [Artifact Subspace Reconstruction (ASR)](https://patents.google.com/patent/US20160113587A1/en).
 5. Common-average referencing.
 6. Apply band-pass filter to remove frequencies below 4 Hz and above 45 Hz.
-7. Down-sample to 128 Hz (original sampling rate was 256 Hz).
+7. Down-sample to 128 Hz.
 
 The order of the preprocessing steps is based on recommendations taken from [Makoto's preprocessing pipeline](https://sccn.ucsd.edu/wiki/Makoto%27s_preprocessing_pipeline), and requirements to use ASR taken from [this PDF](https://sccn.ucsd.edu/githubwiki/files/asr-final-export.pdf) by Christian Kothe.
 
