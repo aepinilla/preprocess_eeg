@@ -21,3 +21,6 @@ downsample_sfreq = 128
 
 # The marker that was triggered when each trial started
 trial_start_marker = 7
+
+# The name of the XDF file (usually generated with LSL LabRecorder)
+filename = "PJGHY.xdf"

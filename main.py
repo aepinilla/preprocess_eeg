@@ -1,4 +1,5 @@
 from src.preprocess_eeg import preprocessing_pipeline
+from src.settings import filename
 
 
 def main(file_name: str):
@@ -6,5 +7,4 @@ def main(file_name: str):
 
 
 if __name__ == "__main__":
-    file_name = "PJGHY.xdf"
-    main(file_name = file_name)
+    main(file_name = filename)
