@@ -43,21 +43,43 @@ class PreprocessEEG:
         # Get sampling frequency of the EEG stream
         eeg_index = self.streams_index['eeg']
         sfreq = int(self.streams[eeg_index]['info']['nominal_srate'][0])
+
         # Create MNE object
         info = mne.create_info(ch_names=eeg_ch_names, sfreq=sfreq, ch_types=CH_TYPES)
         eeg_data = self.streams[eeg_index]["time_series"][:, :len(eeg_ch_names)].T
         raw = mne.io.RawArray(eeg_data, info)
-        # Remove powerline and low frequency noise
+        raw.set_eeg_reference(ref_channels=['REF'])
+        fig = raw.plot(start= 100, duration=3, scalings=1.0)
+        fig.savefig('figures/1-raw.png', bbox_inches='tight')
+
+        # Remove powerline
         notched = raw.notch_filter([50, 60])
-        filtered_low_frequency = notched.filter(0.75, None, fir_design='firwin')
+        notched.plot(start= 100, duration=3, scalings=1.0)
+        fig = notched.plot(start=100, duration=3, scalings=1.0)
+        fig.savefig('figures/2-notched.png', bbox_inches='tight')
+
+        # Remove low frequency noise
+        filtered_low_frequency = notched.filter(1, None, fir_design='firwin')
+        fig = filtered_low_frequency.plot(start=100, duration=3, scalings=1.0)
+        fig.savefig('figures/3-filtered_low_frequency.png', bbox_inches='tight')
+
         # Remove artifacts using ASR
         asr = ASR(sfreq=filtered_low_frequency.info["sfreq"], cutoff=13)
         asr.fit(filtered_low_frequency)
         artifacts_removed = asr.transform(filtered_low_frequency)
+        fig = artifacts_removed.plot(start=100, duration=3, scalings=1.0)
+        fig.savefig('figures/4-artifacts_removed.png', bbox_inches='tight')
+
         # Common-average referencing
         referenced = mne.set_eeg_reference(artifacts_removed, ref_channels='average')
+        fig = referenced[0].plot(start=100, duration=3, scalings=1.0)
+        fig.savefig('figures/5-referenced.png', bbox_inches='tight')
+
         # Band-pass filter
-        band_passed = referenced[0].filter(4, 45, fir_design='firwin')
+        band_passed = referenced[0].filter(1, 45, fir_design='firwin')
+        fig = band_passed.plot(start=100, duration=3, scalings=1.0)
+        fig.savefig('figures/6-band_passed.png', bbox_inches='tight')
+
         # Downsample for faster processing
         self.down_sampled = band_passed.copy().resample(sfreq=downsample_sfreq)
 
