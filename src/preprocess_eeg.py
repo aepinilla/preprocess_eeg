@@ -72,11 +72,12 @@ class PreprocessEEG:
 
         # Common-average referencing
         referenced = mne.set_eeg_reference(artifacts_removed, ref_channels='average')
-        fig = referenced[0].plot(start=100, duration=3, scalings=1.0)
+        referenced = referenced[0].drop_channels('REF')
+        fig = referenced.plot(start=100, duration=3, scalings=1.0)
         fig.savefig('figures/5-referenced.png', bbox_inches='tight')
 
         # Band-pass filter
-        band_passed = referenced[0].filter(1, 45, fir_design='firwin')
+        band_passed = referenced.filter(1, 45, fir_design='firwin')
         fig = band_passed.plot(start=100, duration=3, scalings=1.0)
         fig.savefig('figures/6-band_passed.png', bbox_inches='tight')
 
