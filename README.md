@@ -1,17 +1,17 @@
 # Preprocess EEG
 
 ## Description
-This is a simple Python script for preprocessing EEG signals stored in an XDF file, the format
-commonly used to save data streamed using [LabStreamingLayer (LSL)](https://github.com/sccn/labstreaminglayer).
+This is a simple Python script for preprocessing EEG signals stored in a XDF file, the format
+commonly used to store data streamed using [LabStreamingLayer (LSL)](https://github.com/sccn/labstreaminglayer).
 
 The preprocessing steps are the following:
 1. Apply notch filter (typically at 50 or 60 Hz, depending on which country was the data recorded).
 2. TODO: Remove bad channels.
-3. High-pass filter at 0.75 Hz to remove low frequency drifts.
+3. High-pass at 1Hz to remove low frequency drifts.
 4. Remove artifacts using [Artifact Subspace Reconstruction (ASR)](https://patents.google.com/patent/US20160113587A1/en).
 5. Common-average referencing.
-6. Apply band-pass filter to remove frequencies below 4 Hz and above 45 Hz.
-7. Down-sample to 128 Hz.
+6. Apply band-pass filter to remove frequencies below 1 Hz and above 45 Hz.
+7. Down-sample to 128 Hz (original sampling rate was 256 Hz).
 
 The order of the preprocessing steps is based on recommendations taken from [Makoto's preprocessing pipeline](https://sccn.ucsd.edu/wiki/Makoto%27s_preprocessing_pipeline), and requirements to use ASR taken from [this PDF](https://sccn.ucsd.edu/githubwiki/files/asr-final-export.pdf) by Christian Kothe.
 
@@ -85,9 +85,12 @@ downsample_sfreq = 128
 
 # The marker that was triggered when each trial started
 trial_start_marker = 7
+
+# The name of the XDF file (usually generated with LSL LabRecorder)
+file_name = "PJGHY.xdf"
 ```
 
-2. Go to src/preprocess_eeg.py and edit the Match-Case statement according to the number and signal type of the streams in your file.
+2. Go to src/preprocess_eeg.py and customise the Match-Case statement according to your streams.
 ```
 match self.streams[i]['info']['name'][0]:
     # EDIT ACCORDING TO THE NUMBER OF STREAMS STORED IN YOUR XDF FILE
