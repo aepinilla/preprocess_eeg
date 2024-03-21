@@ -7,9 +7,9 @@ commonly used to store data streamed using [LabStreamingLayer (LSL)](https://git
 ![alt text](https://github.com/aepinilla/preprocess_eeg/blob/main/figures/gif.gif)
 
 The preprocessing steps are the following:
-1. Apply notch filter (typically at 50 or 60 Hz, depending on which country was the data recorded).
+1. Apply notch filter (50 or 60 Hz, depending on which country was the data recorded).
 2. TODO: Remove bad channels.
-3. High-pass at 1Hz to remove low frequency drifts.
+3. High-pass filter at 1Hz to remove low frequency drifts.
 4. Remove artifacts using [Artifact Subspace Reconstruction (ASR)](https://patents.google.com/patent/US20160113587A1/en).
 5. Common-average referencing.
 6. Apply band-pass filter to remove frequencies below 1 Hz and above 45 Hz.
