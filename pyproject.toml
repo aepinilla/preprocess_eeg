@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.11"
 pyxdf = "^1.16.6"
 asrpy = "^0.0.3"
+wget = "^3.2"
 
 
 [build-system]

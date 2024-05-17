@@ -1,10 +1,9 @@
 import types
-# Path to folder with XDF files
 RAW_DATA_PATH = 'data/raw/'
-# Path to folder with preprocessed trials
 TRIALS_DATA_PATH = 'data/preprocessed/'
-#
 data_paths = [RAW_DATA_PATH, TRIALS_DATA_PATH]
+sample_file_name = 'sample_file.xdf'
+trials_file_name = 'trials.npy'
 # Channel types. Required for building MNE object
 CH_TYPES = "eeg"
 
