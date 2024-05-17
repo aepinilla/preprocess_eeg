@@ -5,24 +5,20 @@ import numpy.typing as npt
 from asrpy import ASR
 from dataclasses import dataclass
 
+from src.settings import STREAMS_NAMES, RAW_DATA_PATH, CH_TYPES, stream_types, eeg_ch_names, trial_len, downsample_sfreq, trial_start_marker
 
-from src.settings import STREAMS_NAMES, stream_types, eeg_ch_names, trial_len, downsample_sfreq, trial_start_marker
-
-# Path to folder with XDF files
-DATA_PATH = 'data/'
-# Channel types. Required for building MNE object
-CH_TYPES = "eeg"
 
 class PreprocessEEG:
 
     def __init__(self, file_name: str):
-        self.file = DATA_PATH + file_name
+        self.file = RAW_DATA_PATH + file_name
         # Obtain streams and header from XDF file
         self.streams, self.header = pyxdf.load_xdf(self.file)
         # Initialize streams index dictionary
         self.streams_index = {key: -1 for key in stream_types}
         # Initialize empty variable with down sampled data
         self.down_sampled = []
+
 
     def find_indexes(self):
         for i in range(len(self.streams)):
@@ -84,7 +80,8 @@ class PreprocessEEG:
         # Downsample for faster processing
         self.down_sampled = band_passed.copy().resample(sfreq=downsample_sfreq)
 
-    def extract_trials(self):
+
+    def extract_trials(self) -> list[npt.NDArray[np.float64]]:
         # Get index of EEG and markers streams
         type(self.streams)
         eeg_index = self.streams_index['eeg']

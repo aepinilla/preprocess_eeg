@@ -1,4 +1,13 @@
 import types
+# Path to folder with XDF files
+RAW_DATA_PATH = 'data/raw/'
+# Path to folder with preprocessed trials
+TRIALS_DATA_PATH = 'data/preprocessed/'
+#
+data_paths = [RAW_DATA_PATH, TRIALS_DATA_PATH]
+# Channel types. Required for building MNE object
+CH_TYPES = "eeg"
+
 # Create object compatible with Match-Case Statement
 STREAMS_NAMES = types.SimpleNamespace()
 
@@ -21,6 +30,3 @@ downsample_sfreq = 128
 
 # The marker that was triggered when each trial started
 trial_start_marker = 7
-
-# The name of the XDF file (usually generated with LSL LabRecorder)
-filename = "PJGHY.xdf"
