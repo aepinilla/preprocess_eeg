@@ -1,9 +1,10 @@
 import types
 RAW_DATA_PATH = 'data/raw/'
 TRIALS_DATA_PATH = 'data/preprocessed/'
-data_paths = [RAW_DATA_PATH, TRIALS_DATA_PATH]
-sample_file_name = 'sample_file.xdf'
-trials_file_name = 'trials.npy'
+FIGURES_PATH = 'figures/'
+data_paths = [RAW_DATA_PATH, TRIALS_DATA_PATH, FIGURES_PATH]
+example_file_name = 'sample_file.xdf'
+output_file_name = 'trials.npy'
 # Channel types. Required for building MNE object
 CH_TYPES = "eeg"
 

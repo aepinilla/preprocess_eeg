@@ -9,7 +9,6 @@ from src.settings import STREAMS_NAMES, RAW_DATA_PATH, CH_TYPES, stream_types, e
 
 
 class PreprocessEEG:
-
     def __init__(self, file_name: str):
         self.file = RAW_DATA_PATH + file_name
         # Obtain streams and header from XDF file

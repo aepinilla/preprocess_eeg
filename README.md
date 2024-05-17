@@ -45,22 +45,23 @@ Pinilla, A., Voigt-Antons, J. N., Garcia, J., Raffe, W., & Möller, S. (2023). R
 ```
 git clone git@github.com:aepinilla/preprocess_eeg.git
 ```
-2. Install the required libraries
+2. Install the required libraries:
 ```
 poetry install
 ```
-5. Download the data folder to the root of the project. The data folder is available [here](https://drive.google.com/drive/folders/1tCpIKOqNX8GkNTFijNCGq36yR6OsGGYl?usp=share_link).
-6. Run the script using the following command:
+3. Run the script:
 ```
 python main.py
 ```
+
+You will find the preprocessed data in "data/preprocessed/trials.npy"
 
 ## Settings
 The default settings of this script work with a sample XDF file taken from the paper mentioned above. You can change
 the settings to use it with your XDF files.
 
-To customise it, please do the following:
-1. Go to src/settings.py and adjust the values according to the characteristics of your XDF file. 
+To customise it, do the following:
+1. Go to src/settings.py and adjust the following variables according to the characteristics of your XDF file. 
 ```
 # Names of LabStreamingLayer (LSL) streams
 STREAMS_NAMES.ecg = 'BrainVision RDA'
@@ -81,9 +82,6 @@ downsample_sfreq = 128
 
 # The marker that was triggered when each trial started
 trial_start_marker = 7
-
-# The name of the XDF file (usually generated with LSL LabRecorder)
-file_name = "PJGHY.xdf"
 ```
 
 2. Go to src/preprocess_eeg.py and customise the Match-Case statement according to your streams.
@@ -97,6 +95,13 @@ match self.streams[i]['info']['name'][0]:
     case STREAMS_NAMES.markers:
         self.streams_index['markers'] = i
 ```
+3. Paste your XDF file inside the 'data/raw/' folder
+
+4. Modify the last two lines of main.py to run the script with your data
+```
+filename = <YOUR_FILE_NAME>
+main(file_name=filename, sample_data=False)
+```
 
 ## Python version
-Tested on Python 3.11.7
+Tested on Python 3.11.9
