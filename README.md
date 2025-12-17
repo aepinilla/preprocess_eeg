@@ -8,7 +8,7 @@ commonly used to store data streamed using [LabStreamingLayer (LSL)](https://git
 
 The preprocessing steps are the following:
 1. Apply notch filter (50 or 60 Hz, depending on which country was the data recorded).
-2. TODO: Remove bad channels.
+2. Remove bad channels.
 3. High-pass filter at 1Hz to remove low frequency drifts.
 4. Remove artifacts using [Artifact Subspace Reconstruction (ASR)](https://patents.google.com/patent/US20160113587A1/en).
 5. Common-average referencing.
